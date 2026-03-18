@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "ETG Agent Assistant",
+  "version": "1.0.0",
+  "description": "Автоматизированная оценка тикетов",
+
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "alarms"
+  ],
+
+  "host_permissions": [
+    "https://llmgate.etg.team/*",
+    "https://crm.etg.team/*",
+    "https://mycompetencies.etg.team/*",
+    "https://etg-agent-assistant.vercel.app/*"
+  ],
+
+  "background": {
+    "service_worker": "background/service_worker.js"
+  },
+
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://crm.etg.team/*"],
+      "js": ["content_scripts/scraper.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://mycompetencies.etg.team/*"],
+      "js": ["content_scripts/filler.js"],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "icons": {}
+}
