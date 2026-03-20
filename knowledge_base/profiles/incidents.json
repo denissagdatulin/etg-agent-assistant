@@ -1,0 +1,32 @@
+{
+  "team": "incidents",
+  "label": "Инциденты",
+  "mycomp_tabs": ["tab_0", "tab_3"],
+  "common_files": [
+    "_CORE_instruction.md",
+    "abbr.md"
+  ],
+  "extra_files": [
+    "incident_classification.md"
+  ],
+  "soft_skill_files": [
+    "soft_skills/766_speech_ecology.md",
+    "soft_skills/765_client_understanding.md",
+    "soft_skills/764_written_communication.md",
+    "soft_skills/763_empathy_ei.md",
+    "soft_skills/762_confidentiality.md",
+    "soft_skills/761_brand_communication.md"
+  ],
+  "hard_skill_files": [
+    "hard_skills/incidents/710_resource_efficiency.md",
+    "hard_skills/incidents/709_financial_tables.md",
+    "hard_skills/incidents/708_business_lines.md",
+    "hard_skills/incidents/707_employee_consequences.md",
+    "hard_skills/incidents/706_internal_tools.md",
+    "hard_skills/incidents/705_time_limits.md",
+    "hard_skills/incidents/704_supplier_communication.md",
+    "hard_skills/incidents/703_client_communication.md",
+    "hard_skills/incidents/702_algorithm_adherence.md",
+    "hard_skills/incidents/701_case_logging.md"
+  ]
+}

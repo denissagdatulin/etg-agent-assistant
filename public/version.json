@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "required": true,
+  "download_url": "https://etg-agent-assistant.vercel.app/extension/latest.zip",
+  "instructions_url": "https://etg-agent-assistant.vercel.app/extension/",
+  "changelog": "Maintenance release",
+  "sha256": "23c9dd290a5bcf3848f1c9515e417bc932a3ec4369a9f5203e2df7121bc0f713",
+  "released_at": "2026-03-20T05:50:08.786Z"
+}

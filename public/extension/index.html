@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ETG Agent Assistant</title>
+    <style>
+      :root {
+        --bg: #f4f0e8;
+        --paper: rgba(255, 252, 246, 0.92);
+        --text: #1f2933;
+        --muted: #5e6c76;
+        --accent: #0d6b57;
+        --accent-strong: #084c3f;
+        --line: rgba(31, 41, 51, 0.12);
+        --shadow: 0 24px 60px rgba(31, 41, 51, 0.14);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(13, 107, 87, 0.18), transparent 34%),
+          radial-gradient(circle at bottom right, rgba(198, 145, 70, 0.16), transparent 30%),
+          linear-gradient(160deg, #f8f4ec 0%, #eee6d6 100%);
+      }
+
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 48px 20px 64px;
+      }
+
+      .card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .hero {
+        display: grid;
+        gap: 28px;
+        padding: 40px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        width: fit-content;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(13, 107, 87, 0.09);
+        color: var(--accent-strong);
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(34px, 6vw, 64px);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+
+      .lead {
+        margin: 0;
+        max-width: 720px;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 20px;
+        border-radius: 16px;
+        border: 1px solid transparent;
+        text-decoration: none;
+        font-weight: 700;
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 22px rgba(13, 107, 87, 0.16);
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .btn-secondary {
+        color: var(--accent-strong);
+        border-color: rgba(13, 107, 87, 0.18);
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .meta {
+        display: grid;
+        gap: 12px;
+        padding: 0 40px 32px;
+      }
+
+      .meta-item {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .meta-item strong {
+        color: var(--text);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+        padding: 0 20px 20px;
+      }
+
+      .panel {
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 24px;
+      }
+
+      .panel h2 {
+        margin: 0 0 12px;
+        font-size: 18px;
+      }
+
+      .panel p,
+      .panel li {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      ol {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .footer {
+        padding: 0 40px 40px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      code {
+        padding: 2px 6px;
+        border-radius: 8px;
+        background: rgba(31, 41, 51, 0.06);
+        font-family: "SFMono-Regular", "SF Mono", Consolas, monospace;
+        color: var(--text);
+      }
+
+      @media (max-width: 640px) {
+        .hero, .meta, .footer {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="card">
+        <div class="hero">
+          <span class="eyebrow">ETG internal tool</span>
+          <div>
+            <h1>ETG Agent Assistant</h1>
+            <p class="lead">
+              Рабочее расширение для команды incident. База знаний загружается из облака,
+              поэтому правила обновляются без переустановки. Когда меняется сам код расширения,
+              интерфейс внутри Chrome покажет, что нужна новая версия.
+            </p>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="/extension/latest.zip" download>Скачать последнюю версию</a>
+            <a class="btn btn-secondary" href="chrome://extensions/">Открыть chrome://extensions</a>
+          </div>
+        </div>
+
+        <div class="meta">
+          <div class="meta-item"><strong>Текущая версия:</strong> <span id="current-version">загружается...</span></div>
+          <div class="meta-item"><strong>Последнее изменение:</strong> <span id="current-changelog">будет показано после загрузки</span></div>
+        </div>
+
+        <div class="grid">
+          <section class="panel">
+            <h2>Первая установка</h2>
+            <ol>
+              <li>Скачайте архив и распакуйте его в постоянную папку, которую не будете удалять.</li>
+              <li>Откройте <code>chrome://extensions/</code>.</li>
+              <li>Включите <code>Developer mode</code>.</li>
+              <li>Нажмите <code>Load unpacked</code> и выберите распакованную папку.</li>
+            </ol>
+          </section>
+
+          <section class="panel">
+            <h2>Как обновляться дальше</h2>
+            <ol>
+              <li>Если внутри расширения появилась плашка про обновление, скачайте новый архив по этой же странице.</li>
+              <li>Распакуйте новую версию поверх той же папки или замените её содержимое.</li>
+              <li>Вернитесь в <code>chrome://extensions/</code> и нажмите <code>Reload</code>.</li>
+            </ol>
+          </section>
+
+          <section class="panel">
+            <h2>Что обновляется само</h2>
+            <p>
+              База знаний, профили команд и релизная информация живут на сервере. Их можно менять
+              без переустановки расширения.
+            </p>
+          </section>
+
+          <section class="panel">
+            <h2>Что всё ещё требует действий пользователя</h2>
+            <p>
+              Сам код Chrome extension нельзя бесшовно переустанавливать с обычного сайта на Windows и macOS.
+              Поэтому обновление кода остаётся ручным шагом через <code>Reload</code>.
+            </p>
+          </section>
+        </div>
+
+        <div class="footer">
+          Если архив не скачивается, обратитесь к Denis или откройте эту страницу ещё раз после обновления Vercel.
+        </div>
+      </section>
+    </main>
+
+    <script>
+      fetch('/version.json', { cache: 'no-store' })
+        .then((response) => response.ok ? response.json() : null)
+        .then((data) => {
+          if (!data) return;
+          document.getElementById('current-version').textContent = data.version || 'неизвестно';
+          document.getElementById('current-changelog').textContent = data.changelog || 'без описания';
+        })
+        .catch(() => {
+          document.getElementById('current-version').textContent = 'не удалось загрузить';
+          document.getElementById('current-changelog').textContent = 'не удалось загрузить';
+        });
+    </script>
+  </body>
+  </html>
