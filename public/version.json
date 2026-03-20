@@ -3,7 +3,7 @@
   "required": true,
   "download_url": "https://etg-agent-assistant.vercel.app/extension/latest.zip",
   "instructions_url": "https://etg-agent-assistant.vercel.app/extension/",
-  "changelog": "Maintenance release",
-  "sha256": "b6c214146419246912ce900f22f4c73d6dad98074ad68f020683c88ff8a9234c",
-  "released_at": "2026-03-20T06:52:44.231Z"
+  "changelog": "Harden release flow and separate test vs production builds",
+  "sha256": "6edaa2147871a13a748b137fd506cb98451ff6df1979ca91acad15b11e7a6653",
+  "released_at": "2026-03-20T07:45:43.250Z"
 }
