@@ -421,12 +421,26 @@
           .then((data) => {
             if (!data) return;
             document.getElementById('current-version').textContent = data.version || t.currentVersionFailed;
-            document.getElementById('current-changelog').textContent = data.changelog || t.currentChangelogEmpty;
+            document.getElementById('current-changelog').textContent = pickLocalizedChangelog(data) || t.currentChangelogEmpty;
           })
           .catch(() => {
             document.getElementById('current-version').textContent = t.currentVersionFailed;
             document.getElementById('current-changelog').textContent = t.currentChangelogFailed;
           });
+      }
+
+      function pickLocalizedChangelog(data) {
+        if (!data || typeof data !== 'object') return '';
+        if (currentLang === 'ru' && typeof data.changelog_ru === 'string' && data.changelog_ru.trim()) {
+          return data.changelog_ru.trim();
+        }
+        if (currentLang === 'en' && typeof data.changelog_en === 'string' && data.changelog_en.trim()) {
+          return data.changelog_en.trim();
+        }
+        if (typeof data.changelog === 'string') {
+          return data.changelog.trim();
+        }
+        return '';
       }
 
       applyTranslations();
