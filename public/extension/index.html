@@ -83,6 +83,11 @@
         gap: 12px;
       }
 
+      .action-stack {
+        display: grid;
+        gap: 8px;
+      }
+
       .btn {
         display: inline-flex;
         align-items: center;
@@ -109,6 +114,12 @@
         color: var(--accent-strong);
         border-color: rgba(13, 107, 87, 0.18);
         background: rgba(255, 255, 255, 0.7);
+      }
+
+      .action-hint {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.4;
       }
 
       .meta {
@@ -189,14 +200,15 @@
           <div>
             <h1>ETG Agent Assistant</h1>
             <p class="lead">
-              Рабочее расширение для команды incident. База знаний загружается из облака,
-              поэтому правила обновляются без переустановки. Когда меняется сам код расширения,
-              интерфейс внутри Chrome покажет, что нужна новая версия.
+              Расширение-помощник для оценки качества работы сотрудников.
             </p>
           </div>
           <div class="actions">
             <a class="btn btn-primary" href="/extension/latest.zip" download>Скачать последнюю версию</a>
-            <a class="btn btn-secondary" href="chrome://extensions/">Открыть chrome://extensions</a>
+            <div class="action-stack">
+              <button class="btn btn-secondary" type="button" id="copy-extensions-link">Скопировать chrome://extensions/</button>
+              <div class="action-hint" id="copy-extensions-hint">Вставь адрес в строку браузера Chrome.</div>
+            </div>
           </div>
         </div>
 
@@ -232,23 +244,26 @@
               без переустановки расширения.
             </p>
           </section>
-
-          <section class="panel">
-            <h2>Что всё ещё требует действий пользователя</h2>
-            <p>
-              Сам код Chrome extension нельзя бесшовно переустанавливать с обычного сайта на Windows и macOS.
-              Поэтому обновление кода остаётся ручным шагом через <code>Reload</code>.
-            </p>
-          </section>
-        </div>
-
-        <div class="footer">
-          Если архив не скачивается, обратитесь к Denis или откройте эту страницу ещё раз после обновления Vercel.
         </div>
       </section>
     </main>
 
     <script>
+      const copyButton = document.getElementById('copy-extensions-link');
+      const copyHint = document.getElementById('copy-extensions-hint');
+      copyButton?.addEventListener('click', async () => {
+        const target = 'chrome://extensions/';
+
+        try {
+          await navigator.clipboard.writeText(target);
+          copyButton.textContent = 'Скопировано';
+          if (copyHint) copyHint.textContent = 'Теперь вставь chrome://extensions/ в адресную строку Chrome.';
+        } catch (_) {
+          copyButton.textContent = 'Скопируй вручную';
+          if (copyHint) copyHint.textContent = 'Скопируй и открой вручную: chrome://extensions/';
+        }
+      });
+
       fetch('/version.json', { cache: 'no-store' })
         .then((response) => response.ok ? response.json() : null)
         .then((data) => {
