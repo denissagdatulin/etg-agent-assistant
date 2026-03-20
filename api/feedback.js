@@ -35,9 +35,17 @@ const SHEET_CONFIGS = {
 };
 
 function json(res, status, payload) {
+  applyCors(res);
   res.status(status).setHeader('Content-Type', 'application/json; charset=utf-8');
   res.setHeader('Cache-Control', 'no-store');
   res.send(JSON.stringify(payload));
+}
+
+function applyCors(res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Feedback-Token');
+  res.setHeader('Access-Control-Max-Age', '86400');
 }
 
 function readEnv(name, fallback = '') {
@@ -445,6 +453,11 @@ async function autoResizeAppendedRow(sheets, spreadsheetId, sheetId, oneBasedRow
 
 module.exports = async (req, res) => {
   const expectedToken = process.env.FEEDBACK_TOKEN;
+
+  if (req.method === 'OPTIONS') {
+    applyCors(res);
+    return res.status(204).end();
+  }
 
   if (req.method !== 'POST') {
     return json(res, 405, { error: 'Method not allowed.' });
