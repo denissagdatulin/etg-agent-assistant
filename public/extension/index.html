@@ -49,6 +49,13 @@
         padding: 40px;
       }
 
+      .hero-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
       .eyebrow {
         display: inline-flex;
         width: fit-content;
@@ -60,6 +67,31 @@
         font-weight: 600;
         letter-spacing: 0.04em;
         text-transform: uppercase;
+      }
+
+      .lang-switch {
+        display: inline-flex;
+        padding: 4px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.74);
+      }
+
+      .lang-btn {
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        padding: 8px 12px;
+        border-radius: 999px;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .lang-btn.active {
+        background: var(--accent);
+        color: #fff;
       }
 
       h1 {
@@ -185,6 +217,11 @@
       }
 
       @media (max-width: 640px) {
+        .hero-top {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
         .hero, .meta, .footer {
           padding-left: 20px;
           padding-right: 20px;
@@ -196,85 +233,204 @@
     <main>
       <section class="card">
         <div class="hero">
-          <span class="eyebrow">ETG internal tool</span>
+          <div class="hero-top">
+            <span class="eyebrow" id="eyebrow">ETG internal tool</span>
+            <div class="lang-switch" aria-label="Language switch">
+              <button class="lang-btn" type="button" data-lang="ru">RU</button>
+              <button class="lang-btn" type="button" data-lang="en">EN</button>
+            </div>
+          </div>
           <div>
             <h1>ETG Agent Assistant</h1>
-            <p class="lead">
-              Расширение-помощник для оценки качества работы сотрудников.
-            </p>
+            <p class="lead" id="lead"></p>
           </div>
           <div class="actions">
-            <a class="btn btn-primary" href="/extension/latest.zip" download>Скачать последнюю версию</a>
+            <a class="btn btn-primary" href="/extension/latest.zip" download id="download-link"></a>
             <div class="action-stack">
-              <button class="btn btn-secondary" type="button" id="copy-extensions-link">Скопировать chrome://extensions/</button>
-              <div class="action-hint" id="copy-extensions-hint">Вставь адрес в строку браузера Chrome.</div>
+              <button class="btn btn-secondary" type="button" id="copy-extensions-link"></button>
+              <div class="action-hint" id="copy-extensions-hint"></div>
             </div>
           </div>
         </div>
 
         <div class="meta">
-          <div class="meta-item"><strong>Текущая версия:</strong> <span id="current-version">загружается...</span></div>
-          <div class="meta-item"><strong>Последнее изменение:</strong> <span id="current-changelog">будет показано после загрузки</span></div>
+          <div class="meta-item"><strong id="current-version-label"></strong> <span id="current-version"></span></div>
+          <div class="meta-item"><strong id="current-changelog-label"></strong> <span id="current-changelog"></span></div>
         </div>
 
         <div class="grid">
           <section class="panel">
-            <h2>Первая установка</h2>
-            <ol>
-              <li>Скачайте архив и распакуйте его в постоянную папку, которую не будете удалять.</li>
-              <li>Откройте <code>chrome://extensions/</code>.</li>
-              <li>Включите <code>Developer mode</code>.</li>
-              <li>Нажмите <code>Load unpacked</code> и выберите распакованную папку.</li>
-            </ol>
+            <h2 id="install-title"></h2>
+            <ol id="install-steps"></ol>
           </section>
 
           <section class="panel">
-            <h2>Как обновляться дальше</h2>
-            <ol>
-              <li>Если внутри расширения появилась плашка про обновление, скачайте новый архив по этой же странице.</li>
-              <li>Распакуйте новую версию поверх той же папки или замените её содержимое.</li>
-              <li>Вернитесь в <code>chrome://extensions/</code> и нажмите <code>Reload</code>.</li>
-            </ol>
+            <h2 id="update-title"></h2>
+            <ol id="update-steps"></ol>
           </section>
 
           <section class="panel">
-            <h2>Что обновляется само</h2>
-            <p>
-              База знаний, профили команд и релизная информация живут на сервере. Их можно менять
-              без переустановки расширения.
-            </p>
+            <h2 id="auto-title"></h2>
+            <p id="auto-copy"></p>
           </section>
         </div>
       </section>
     </main>
 
     <script>
+      const TRANSLATIONS = {
+        ru: {
+          eyebrow: 'ETG internal tool',
+          lead: 'Расширение-помощник для оценки качества работы сотрудников.',
+          download: 'Скачать последнюю версию',
+          copy: 'Скопировать chrome://extensions/',
+          copyHint: 'Вставь адрес в строку браузера Chrome.',
+          copyDone: 'Скопировано',
+          copyDoneHint: 'Теперь вставь chrome://extensions/ в адресную строку Chrome.',
+          copyFallback: 'Скопируй вручную',
+          copyFallbackHint: 'Скопируй и открой вручную: chrome://extensions/',
+          currentVersionLabel: 'Текущая версия:',
+          currentVersionLoading: 'загружается...',
+          currentVersionFailed: 'не удалось загрузить',
+          currentChangelogLabel: 'Последнее изменение:',
+          currentChangelogLoading: 'будет показано после загрузки',
+          currentChangelogFailed: 'не удалось загрузить',
+          currentChangelogEmpty: 'без описания',
+          installTitle: 'Первая установка',
+          installSteps: [
+            'Скачайте архив и распакуйте его в постоянную папку, которую не будете удалять.',
+            'Откройте chrome://extensions/.',
+            'Включите Developer mode.',
+            'Нажмите Load unpacked и выберите распакованную папку.'
+          ],
+          updateTitle: 'Как обновляться дальше',
+          updateSteps: [
+            'Если внутри расширения появилась плашка про обновление, скачайте новый архив по этой же странице.',
+            'Распакуйте новую версию поверх той же папки или замените её содержимое.',
+            'Вернитесь в chrome://extensions/ и нажмите Reload.'
+          ],
+          autoTitle: 'Что обновляется само',
+          autoCopy: 'База знаний, профили команд и релизная информация живут на сервере. Их можно менять без переустановки расширения.'
+        },
+        en: {
+          eyebrow: 'ETG internal tool',
+          lead: 'An assistant extension that helps evaluate employee performance quality.',
+          download: 'Download latest version',
+          copy: 'Copy chrome://extensions/',
+          copyHint: 'Paste the address into the Chrome address bar.',
+          copyDone: 'Copied',
+          copyDoneHint: 'Now paste chrome://extensions/ into the Chrome address bar.',
+          copyFallback: 'Copy manually',
+          copyFallbackHint: 'Copy and open manually: chrome://extensions/',
+          currentVersionLabel: 'Current version:',
+          currentVersionLoading: 'loading...',
+          currentVersionFailed: 'failed to load',
+          currentChangelogLabel: 'Latest change:',
+          currentChangelogLoading: 'will appear after loading',
+          currentChangelogFailed: 'failed to load',
+          currentChangelogEmpty: 'no description',
+          installTitle: 'First installation',
+          installSteps: [
+            'Download the archive and extract it into a permanent folder you will not delete.',
+            'Open chrome://extensions/.',
+            'Enable Developer mode.',
+            'Click Load unpacked and select the extracted folder.'
+          ],
+          updateTitle: 'How to update later',
+          updateSteps: [
+            'If the extension shows an update notice, download the new archive from this page.',
+            'Extract the new version over the same folder or replace its contents.',
+            'Return to chrome://extensions/ and click Reload.'
+          ],
+          autoTitle: 'What updates automatically',
+          autoCopy: 'The knowledge base, team profiles, and release metadata live on the server and can be updated without reinstalling the extension.'
+        }
+      };
+
+      let currentLang = navigator.language?.toLowerCase().startsWith('ru') ? 'ru' : 'en';
+
+      function renderList(targetId, items) {
+        const list = document.getElementById(targetId);
+        list.innerHTML = '';
+
+        items.forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          list.appendChild(li);
+        });
+      }
+
+      function applyTranslations() {
+        const t = TRANSLATIONS[currentLang];
+
+        document.getElementById('eyebrow').textContent = t.eyebrow;
+        document.getElementById('lead').textContent = t.lead;
+        document.getElementById('download-link').textContent = t.download;
+        document.getElementById('copy-extensions-link').textContent = t.copy;
+        document.getElementById('copy-extensions-hint').textContent = t.copyHint;
+        document.getElementById('current-version-label').textContent = t.currentVersionLabel;
+        document.getElementById('current-version').textContent = t.currentVersionLoading;
+        document.getElementById('current-changelog-label').textContent = t.currentChangelogLabel;
+        document.getElementById('current-changelog').textContent = t.currentChangelogLoading;
+        document.getElementById('install-title').textContent = t.installTitle;
+        document.getElementById('update-title').textContent = t.updateTitle;
+        document.getElementById('auto-title').textContent = t.autoTitle;
+        document.getElementById('auto-copy').textContent = t.autoCopy;
+
+        renderList('install-steps', t.installSteps);
+        renderList('update-steps', t.updateSteps);
+
+        document.querySelectorAll('.lang-btn').forEach((button) => {
+          button.classList.toggle('active', button.dataset.lang === currentLang);
+        });
+      }
+
+      document.querySelectorAll('.lang-btn').forEach((button) => {
+        button.addEventListener('click', () => {
+          if (button.dataset.lang === currentLang) return;
+          currentLang = button.dataset.lang;
+          applyTranslations();
+          loadVersionInfo();
+        });
+      });
+
       const copyButton = document.getElementById('copy-extensions-link');
       const copyHint = document.getElementById('copy-extensions-hint');
       copyButton?.addEventListener('click', async () => {
         const target = 'chrome://extensions/';
+        const t = TRANSLATIONS[currentLang];
 
         try {
           await navigator.clipboard.writeText(target);
-          copyButton.textContent = 'Скопировано';
-          if (copyHint) copyHint.textContent = 'Теперь вставь chrome://extensions/ в адресную строку Chrome.';
+          copyButton.textContent = t.copyDone;
+          if (copyHint) copyHint.textContent = t.copyDoneHint;
         } catch (_) {
-          copyButton.textContent = 'Скопируй вручную';
-          if (copyHint) copyHint.textContent = 'Скопируй и открой вручную: chrome://extensions/';
+          copyButton.textContent = t.copyFallback;
+          if (copyHint) copyHint.textContent = t.copyFallbackHint;
         }
       });
 
-      fetch('/version.json', { cache: 'no-store' })
-        .then((response) => response.ok ? response.json() : null)
-        .then((data) => {
-          if (!data) return;
-          document.getElementById('current-version').textContent = data.version || 'неизвестно';
-          document.getElementById('current-changelog').textContent = data.changelog || 'без описания';
-        })
-        .catch(() => {
-          document.getElementById('current-version').textContent = 'не удалось загрузить';
-          document.getElementById('current-changelog').textContent = 'не удалось загрузить';
-        });
+      function loadVersionInfo() {
+        const t = TRANSLATIONS[currentLang];
+
+        document.getElementById('current-version').textContent = t.currentVersionLoading;
+        document.getElementById('current-changelog').textContent = t.currentChangelogLoading;
+
+        fetch('/version.json', { cache: 'no-store' })
+          .then((response) => response.ok ? response.json() : null)
+          .then((data) => {
+            if (!data) return;
+            document.getElementById('current-version').textContent = data.version || t.currentVersionFailed;
+            document.getElementById('current-changelog').textContent = data.changelog || t.currentChangelogEmpty;
+          })
+          .catch(() => {
+            document.getElementById('current-version').textContent = t.currentVersionFailed;
+            document.getElementById('current-changelog').textContent = t.currentChangelogFailed;
+          });
+      }
+
+      applyTranslations();
+      loadVersionInfo();
     </script>
   </body>
   </html>
