@@ -1,0 +1,44 @@
+{
+  "name": "etg-agent-assistant",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome Extension для автоматизированной оценки тикетов ETG",
+  "scripts": {
+    "dev": "webpack --watch --mode development --env profile=local-test --env outputDir=dist",
+    "build": "npm run build:test",
+    "build:test": "webpack --mode development --env profile=local-test --env outputDir=dist",
+    "build:release": "webpack --mode production --env profile=release --env outputDir=dist-release",
+    "build:release:zip": "npm run build:release && cd dist-release && zip -r ../dist-release.zip . && cd ..",
+    "release:prepare": "node scripts/prepare_release.mjs",
+    "release:validate": "node scripts/validate_release.mjs",
+    "release:build": "npm run build:release:zip && npm run release:prepare && npm run release:validate",
+    "release:test:prepare": "node scripts/download_release_bundle.mjs",
+    "verify:kb-sync": "node scripts/verify_remote_kb_sync.mjs",
+    "browser:install": "npx playwright install chromium",
+    "browser:launch": "node tools/browser/launch_extension_browser.mjs",
+    "browser:status": "node tools/browser/browser_status.mjs",
+    "browser:popup": "node tools/browser/open_extension_popup.mjs",
+    "browser:evaluate-open": "node tools/browser/evaluate_open_tickets.mjs",
+    "browser:release:launch": "ETG_BROWSER_PORT=9333 ETG_BROWSER_PROFILE_DIR=output/playwright/release-chromium-profile ETG_BROWSER_SESSION_FILE=output/playwright/release-session.json ETG_EXTENSION_PATH=output/release-test/extension node tools/browser/launch_extension_browser.mjs",
+    "browser:release:status": "ETG_BROWSER_PORT=9333 ETG_BROWSER_PROFILE_DIR=output/playwright/release-chromium-profile ETG_BROWSER_SESSION_FILE=output/playwright/release-session.json ETG_EXTENSION_PATH=output/release-test/extension node tools/browser/browser_status.mjs",
+    "browser:release:popup": "ETG_BROWSER_PORT=9333 ETG_BROWSER_PROFILE_DIR=output/playwright/release-chromium-profile ETG_BROWSER_SESSION_FILE=output/playwright/release-session.json ETG_EXTENSION_PATH=output/release-test/extension node tools/browser/open_extension_popup.mjs",
+    "browser:release:evaluate-open": "ETG_BROWSER_PORT=9333 ETG_BROWSER_PROFILE_DIR=output/playwright/release-chromium-profile ETG_BROWSER_SESSION_FILE=output/playwright/release-session.json ETG_EXTENSION_PATH=output/release-test/extension ETG_EVALUATION_OUTPUT_DIR=output/release-evaluations node tools/browser/evaluate_open_tickets.mjs",
+    "browser:scrape-batch": "node tools/browser/run_scrape_batch_with_monitor.mjs",
+    "eval:init": "node tools/evals/init_case.mjs",
+    "eval:run": "node tools/evals/run_ticket_eval.mjs",
+    "eval:smoke": "node tools/evals/run_guardrail_smoke.mjs",
+    "eval:probe": "node tools/evals/run_reasoning_probe.mjs",
+    "eval:authors": "node tools/evals/run_author_probe.mjs"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^12.0.2",
+    "javascript-obfuscator": "^4.1.1",
+    "playwright": "^1.55.0",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-obfuscator": "^3.5.1"
+  },
+  "dependencies": {
+    "googleapis": "^171.4.0"
+  }
+}
