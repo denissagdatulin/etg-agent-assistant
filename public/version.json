@@ -1,11 +1,11 @@
 {
-  "version": "1.0.6082.2442",
+  "version": "1.0.6082.5329",
   "required": true,
   "download_url": "https://etg-agent-assistant.vercel.app/extension/latest.zip",
   "instructions_url": "https://etg-agent-assistant.vercel.app/extension/",
-  "changelog": "Improved evaluation speed for tickets with calls",
-  "changelog_ru": "Ускорили оценку тикетов со звонками",
-  "changelog_en": "Improved evaluation speed for tickets with calls",
-  "sha256": "1f6f72b54c1d3c541bbd342795266ad39a38c76760bd3185ac8bd18c35b71ee7",
-  "released_at": "2026-03-23T06:47:05.981Z"
+  "changelog": "Fixed the activity date in evaluations: it is now based on the ticket closure date and correctly respects the new KPI period starting on the 20th.",
+  "changelog_ru": "Исправили дату активности в оценках: теперь она определяется корректно по дате закрытия тикета и правильно учитывает новый KPI-период с 20-го числа.",
+  "changelog_en": "Fixed the activity date in evaluations: it is now based on the ticket closure date and correctly respects the new KPI period starting on the 20th.",
+  "sha256": "e2e1a961a8a25b7c5a12c8f6b41a2840377b4820dd8bd63bc26d425766c19382",
+  "released_at": "2026-03-23T14:48:18.879Z"
 }

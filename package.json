@@ -19,6 +19,7 @@
     "browser:status": "node tools/browser/browser_status.mjs",
     "browser:popup": "node tools/browser/open_extension_popup.mjs",
     "browser:evaluate-open": "node tools/browser/evaluate_open_tickets.mjs",
+    "browser:export-training": "node tools/browser/export_training_ticket_set.mjs",
     "browser:release:launch": "ETG_BROWSER_PORT=9333 ETG_BROWSER_PROFILE_DIR=output/playwright/release-chromium-profile ETG_BROWSER_SESSION_FILE=output/playwright/release-session.json ETG_EXTENSION_PATH=output/release-test/extension node tools/browser/launch_extension_browser.mjs",
     "browser:release:status": "ETG_BROWSER_PORT=9333 ETG_BROWSER_PROFILE_DIR=output/playwright/release-chromium-profile ETG_BROWSER_SESSION_FILE=output/playwright/release-session.json ETG_EXTENSION_PATH=output/release-test/extension node tools/browser/browser_status.mjs",
     "browser:release:popup": "ETG_BROWSER_PORT=9333 ETG_BROWSER_PROFILE_DIR=output/playwright/release-chromium-profile ETG_BROWSER_SESSION_FILE=output/playwright/release-session.json ETG_EXTENSION_PATH=output/release-test/extension node tools/browser/open_extension_popup.mjs",
