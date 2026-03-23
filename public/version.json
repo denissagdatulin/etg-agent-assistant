@@ -1,11 +1,11 @@
 {
-  "version": "1.0.6079.6293",
+  "version": "1.0.6082.2442",
   "required": true,
   "download_url": "https://etg-agent-assistant.vercel.app/extension/latest.zip",
   "instructions_url": "https://etg-agent-assistant.vercel.app/extension/",
-  "changelog": "Fixed problem report submission",
-  "changelog_ru": "Исправили отправку репорта о проблеме",
-  "changelog_en": "Fixed problem report submission",
-  "sha256": "18bd40161c7e86f31a7aceebda66efe83e2ef9f6e7da810e7f6e268359a75541",
-  "released_at": "2026-03-20T17:28:56.670Z"
+  "changelog": "Improved evaluation speed for tickets with calls",
+  "changelog_ru": "Ускорили оценку тикетов со звонками",
+  "changelog_en": "Improved evaluation speed for tickets with calls",
+  "sha256": "1f6f72b54c1d3c541bbd342795266ad39a38c76760bd3185ac8bd18c35b71ee7",
+  "released_at": "2026-03-23T06:47:05.981Z"
 }
