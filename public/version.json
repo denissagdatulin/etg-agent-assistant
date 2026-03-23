@@ -1,11 +1,11 @@
 {
-  "version": "1.0.6082.5329",
+  "version": "1.0.6082.5980",
   "required": true,
   "download_url": "https://etg-agent-assistant.vercel.app/extension/latest.zip",
   "instructions_url": "https://etg-agent-assistant.vercel.app/extension/",
-  "changelog": "Fixed the activity date in evaluations: it is now based on the ticket closure date and correctly respects the new KPI period starting on the 20th.",
-  "changelog_ru": "Исправили дату активности в оценках: теперь она определяется корректно по дате закрытия тикета и правильно учитывает новый KPI-период с 20-го числа.",
-  "changelog_en": "Fixed the activity date in evaluations: it is now based on the ticket closure date and correctly respects the new KPI period starting on the 20th.",
-  "sha256": "e2e1a961a8a25b7c5a12c8f6b41a2840377b4820dd8bd63bc26d425766c19382",
-  "released_at": "2026-03-23T14:48:18.879Z"
+  "changelog": "Problem report text now stays in place if the extension window is accidentally collapsed or closed.",
+  "changelog_ru": "Текст в репортах о проблеме теперь не пропадает, если окно расширения случайно свернулось или закрылось.",
+  "changelog_en": "Problem report text now stays in place if the extension window is accidentally collapsed or closed.",
+  "sha256": "979cb772fe66141d718c6d74f23071a5344a99a7d437d9e14636abd40b628bfa",
+  "released_at": "2026-03-23T16:36:50.015Z"
 }
