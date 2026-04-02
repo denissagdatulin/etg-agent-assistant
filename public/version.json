@@ -1,11 +1,12 @@
 {
-  "version": "1.0.6085.3816",
+  "version": "1.0.6092.2110",
+  "kb_version": "48384668718c",
   "required": true,
   "download_url": "https://etg-agent-assistant.vercel.app/extension/latest.zip",
   "instructions_url": "https://etg-agent-assistant.vercel.app/extension/",
-  "changelog": "Improved ticket evaluation accuracy: fixed response-time and conversation-context detection, and made evaluation comments clearer.",
-  "changelog_ru": "Улучшили точность оценки тикетов: исправили определение сроков ответа и контекста переписки, а также сделали комментарии к оценке понятнее.",
-  "changelog_en": "Improved ticket evaluation accuracy: fixed response-time and conversation-context detection, and made evaluation comments clearer.",
-  "sha256": "5925c5f035b0bd7714c98ac3e4745eaec901f459a7d65b15303ddb971d165343",
-  "released_at": "2026-03-26T10:36:05.923Z"
+  "changelog": "Improved ticket evaluation quality and fixed several issues in the extension.",
+  "changelog_ru": "Улучшили качество оценки тикетов и исправили ряд неточностей в работе расширения.",
+  "changelog_en": "Improved ticket evaluation quality and fixed several issues in the extension.",
+  "sha256": "2fe7687eb94add9f5b142da041f2b549467d44088564d0b3c6922c1dd7026cee",
+  "released_at": "2026-04-02T05:51:43.381Z"
 }

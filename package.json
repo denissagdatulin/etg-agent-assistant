@@ -29,7 +29,10 @@
     "eval:run": "node tools/evals/run_ticket_eval.mjs",
     "eval:smoke": "node tools/evals/run_guardrail_smoke.mjs",
     "eval:probe": "node tools/evals/run_reasoning_probe.mjs",
-    "eval:authors": "node tools/evals/run_author_probe.mjs"
+    "eval:authors": "node tools/evals/run_author_probe.mjs",
+    "llmgate:models": "node tools/evals/list_llmgate_models.mjs",
+    "artifacts:cleanup": "node tools/maintenance/cleanup_disposable_artifacts.mjs",
+    "artifacts:cleanup:dry": "node tools/maintenance/cleanup_disposable_artifacts.mjs --dry-run"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^12.0.2",
