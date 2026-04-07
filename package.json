@@ -31,6 +31,7 @@
     "browser:release:status": "ETG_BROWSER_PORT=9333 ETG_BROWSER_PROFILE_DIR=output/playwright/release-chromium-profile ETG_BROWSER_SESSION_FILE=output/playwright/release-session.json ETG_EXTENSION_PATH=output/release-test/extension node tools/browser/browser_status.mjs",
     "browser:release:popup": "ETG_BROWSER_PORT=9333 ETG_BROWSER_PROFILE_DIR=output/playwright/release-chromium-profile ETG_BROWSER_SESSION_FILE=output/playwright/release-session.json ETG_EXTENSION_PATH=output/release-test/extension node tools/browser/open_extension_popup.mjs",
     "browser:release:evaluate-open": "ETG_BROWSER_PORT=9333 ETG_BROWSER_PROFILE_DIR=output/playwright/release-chromium-profile ETG_BROWSER_SESSION_FILE=output/playwright/release-session.json ETG_EXTENSION_PATH=output/release-test/extension ETG_EVALUATION_OUTPUT_DIR=output/release-evaluations node tools/browser/evaluate_open_tickets.mjs",
+    "release:smoke:kb": "node tools/browser/run_release_kb_lifecycle_smoke.mjs",
     "browser:scrape-batch": "node tools/browser/run_scrape_batch_with_monitor.mjs",
     "eval:init": "node tools/evals/init_case.mjs",
     "eval:run": "node tools/evals/run_ticket_eval.mjs",

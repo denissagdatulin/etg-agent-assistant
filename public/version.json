@@ -1,12 +1,12 @@
 {
-  "version": "1.0.6097.6590",
+  "version": "1.0.6097.6807",
   "kb_version": "e36fb866b51e",
   "required": true,
   "download_url": "https://etg-agent-assistant.vercel.app/extension/latest.zip",
   "instructions_url": "https://etg-agent-assistant.vercel.app/extension/",
-  "changelog": "Improved reliability of extension updates and knowledge base loading.",
-  "changelog_ru": "Улучшена надежность обновления расширения и загрузки базы знаний.",
-  "changelog_en": "Improved reliability of extension updates and knowledge base loading.",
-  "sha256": "7d16469ff1ce94ad3b36fed6ac8e41a713860b341a37df334b7731a9febb15a9",
-  "released_at": "2026-04-07T18:18:23.657Z"
+  "changelog": "Improved verification of knowledge base updates and release stability.",
+  "changelog_ru": "Улучшена проверка обновления базы знаний и стабильности релизной версии.",
+  "changelog_en": "Improved verification of knowledge base updates and release stability.",
+  "sha256": "654474ffc0059417e772267d436938518b3f0108db01417f31cc7c5d2e61dfae",
+  "released_at": "2026-04-07T18:54:38.948Z"
 }
