@@ -1,12 +1,12 @@
 {
-  "version": "1.0.6097.6807",
-  "kb_version": "e36fb866b51e",
+  "version": "1.0.6098.2340",
+  "kb_version": "83928596f473",
   "required": true,
   "download_url": "https://etg-agent-assistant.vercel.app/extension/latest.zip",
   "instructions_url": "https://etg-agent-assistant.vercel.app/extension/",
-  "changelog": "Improved verification of knowledge base updates and release stability.",
-  "changelog_ru": "Улучшена проверка обновления базы знаний и стабильности релизной версии.",
-  "changelog_en": "Improved verification of knowledge base updates and release stability.",
-  "sha256": "654474ffc0059417e772267d436938518b3f0108db01417f31cc7c5d2e61dfae",
-  "released_at": "2026-04-07T18:54:38.948Z"
+  "changelog": "Fixed employee name detection in the evaluation comment so it appears in the correct language.",
+  "changelog_ru": "Исправлено определение имени сотрудника в комментарии к оценке на правильном языке.",
+  "changelog_en": "Fixed employee name detection in the evaluation comment so it appears in the correct language.",
+  "sha256": "86df45a3a0a195fd18d419fd9f4184b65b9067978661494c674f1adc90bf2b5d",
+  "released_at": "2026-04-08T06:30:02.598Z"
 }
