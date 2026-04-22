@@ -1,12 +1,12 @@
 {
-  "version": "1.0.6098.2340",
+  "version": "1.0.6112.2071",
   "kb_version": "83928596f473",
   "required": true,
   "download_url": "https://etg-agent-assistant.vercel.app/extension/latest.zip",
   "instructions_url": "https://etg-agent-assistant.vercel.app/extension/",
-  "changelog": "Fixed employee name detection in the evaluation comment so it appears in the correct language.",
-  "changelog_ru": "Исправлено определение имени сотрудника в комментарии к оценке на правильном языке.",
-  "changelog_en": "Fixed employee name detection in the evaluation comment so it appears in the correct language.",
-  "sha256": "86df45a3a0a195fd18d419fd9f4184b65b9067978661494c674f1adc90bf2b5d",
-  "released_at": "2026-04-08T06:30:02.598Z"
+  "changelog": "Improved ticket evaluation quality and updated knowledge base rules.",
+  "changelog_ru": "Улучшено качество оценки тикетов и обновлены правила базы знаний.",
+  "changelog_en": "Improved ticket evaluation quality and updated knowledge base rules.",
+  "sha256": "823ea916a70232c5b21287d0c11cf541e7b002c56e6801e02f05a6e59a193ec3",
+  "released_at": "2026-04-22T05:45:19.513Z"
 }
